@@ -2,6 +2,10 @@
 
 Restore the `ctesf5` PostgreSQL database using Docker and a backup file.
 
+### Fix backup
+
+remove all `OWNER TO cf5` sentences
+
 ### Start
 
 docker compose up
