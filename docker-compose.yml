@@ -10,7 +10,22 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      - ./pgdata:/var/lib/postgresql/data
+
+  metabase:
+    image: metabase/metabase:latest
+    container_name: metabase
+    ports:
+      - "3000:3000"
+    environment:
+      MB_DB_TYPE: postgres
+      MB_DB_DBNAME: postgres
+      MB_DB_PORT: 5432
+      MB_DB_USER: postgres
+      MB_DB_PASS: root
+      MB_DB_HOST: ctesf5-db
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
 
 volumes:
   pgdata:

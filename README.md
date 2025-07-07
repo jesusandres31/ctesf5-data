@@ -30,3 +30,8 @@ docker exec -u postgres -it ctesf5-db psql -U postgres -d ctesf5
 
 SELECT * FROM canchas_cancha;
 ```
+
+# User
+
+test@gmail.com
+Metabasectes1
