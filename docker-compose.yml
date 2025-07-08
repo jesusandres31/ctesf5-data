@@ -1,31 +1,38 @@
 version: "3.8"
 
 services:
-  ctesf5-db:
+  postgres-db:
     image: postgres:16
-    container_name: ctesf5-db
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: root
+    container_name: postgres-db
     ports:
       - "5432:5432"
     volumes:
       - ./pgdata:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: postgres
+      PGDATA: /var/lib/postgresql/data
 
   metabase:
     image: metabase/metabase:latest
     container_name: metabase
     ports:
       - "3000:3000"
+    volumes:
+      - ./metabase-data:/metabase-data
     environment:
-      MB_DB_TYPE: postgres
-      MB_DB_DBNAME: postgres
-      MB_DB_PORT: 5432
+      MB_DB_TYPE: postgres # change
+      MB_DB_DBNAME: postgres # change
+      MB_DB_PORT: 5432 # change
       MB_DB_USER: postgres
       MB_DB_PASS: root
-      MB_DB_HOST: ctesf5-db
-    volumes:
-      - ./pgdata:/var/lib/postgresql/data
+      MB_DB_HOST: postgres-db
+    depends_on:
+      - postgres-db
+    links:
+      - postgres-db
 
 volumes:
   pgdata:
+  metabase-data:
