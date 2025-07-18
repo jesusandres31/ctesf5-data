@@ -12,18 +12,18 @@ docker compose up
   first, remove all `OWNER TO cf5` sentences from the backup file.
 
 - Copying backup file into the container.
-  docker cp backup.sql ctesf5-db:/tmp/backup.sql
+  docker cp backup.sql postgres-db:/tmp/backup.sql
 
 - Dropping and creating the database.
-  docker exec -u postgres ctesf5-db psql -U $DB_USER -c "DROP DATABASE IF EXISTS $DB_NAME;"
-  docker exec -u postgres ctesf5-db psql -U $DB_USER -c "CREATE DATABASE $DB_NAME;"
+  docker exec -u postgres postgres-db psql -U $DB_USER -c "DROP DATABASE IF EXISTS ctesf5;"
+  docker exec -u postgres postgres-db psql -U $DB_USER -c "CREATE DATABASE ctesf5;"
 
 - Restoring the backup.
-  docker exec -u postgres ctesf5-db psql -U postgres -d ctesf5 -f /tmp/backup.sql
+  docker exec -u postgres postgres-db psql -U postgres -d ctesf5 -f /tmp/backup.sql
 
 # Health check
 
-docker exec -u postgres -it ctesf5-db psql -U postgres -d ctesf5
+docker exec -u postgres -it postgres-db psql -U postgres -d ctesf5
 
 ```
 \dt

@@ -4,7 +4,7 @@
 
 set -e
 
-CONTAINER_NAME=ctesf5-db
+CONTAINER_NAME=postgres-db
 BACKUP_FILE=backup.sql
 DB_NAME=ctesf5
 DB_USER=postgres
