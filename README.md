@@ -15,8 +15,8 @@ docker compose up
   docker cp backup.sql postgres-db:/tmp/backup.sql
 
 - Dropping and creating the database.
-  docker exec -u postgres postgres-db psql -U $DB_USER -c "DROP DATABASE IF EXISTS ctesf5;"
-  docker exec -u postgres postgres-db psql -U $DB_USER -c "CREATE DATABASE ctesf5;"
+  docker exec -u postgres postgres-db psql -U postgres -c "DROP DATABASE IF EXISTS ctesf5;"
+  docker exec -u postgres postgres-db psql -U postgres -c "CREATE DATABASE ctesf5;"
 
 - Restoring the backup.
   docker exec -u postgres postgres-db psql -U postgres -d ctesf5 -f /tmp/backup.sql

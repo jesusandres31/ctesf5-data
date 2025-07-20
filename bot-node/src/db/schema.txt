@@ -1,0 +1,128 @@
+=== SCHEMA TABLES ===
+
+--- CANCHAS ---
+- canchas_cancha:
+  Canchas deportivas con:
+    - nombre
+    - descripción
+    - relación con ubicacion (ubicacion_id)
+
+--- CANTINA ---
+- cantina_cantina:
+  Cantinas físicas con:
+    - nombre
+    - descripción
+    - ubicacion_id
+
+- cantina_producto:
+  Productos definidos por:
+    - nombre, medida, unidades_por_bulto, stock_mínimo
+    - relaciones: marca_id, tipo_id, tipo_bulto_id, tipo_medida_id, tipo_unidad_id, sabor_id
+
+- cantina_productocantina:
+  Relación entre producto y cantina:
+    - cantidad_en_stock, precio, descuento_promocion
+    - cantina_id, producto_id
+
+- Tablas auxiliares:
+  - cantina_marca
+  - cantina_sabor
+  - cantina_tipobulto
+  - cantina_tipomedida
+  - cantina_tipoproducto
+  - cantina_tipounidad
+
+--- FINANZAS ---
+- finanzas_ingreso:
+  Ingresos registrados con:
+    - nombre, fecha, monto_efectivo, monto_transferencia
+    - caja_efectivo_id, caja_transferencia_id
+    - categoria_id, tipo_id, ubicacion_id
+
+- finanzas_gasto:
+  Gastos registrados con:
+    - nombre, fecha, monto_efectivo, monto_transferencia
+    - caja_efectivo_id, caja_transferencia_id
+    - categoria_id, tipo_id, ubicacion_id
+
+- finanzas_movimiento:
+  Movimientos entre cajas:
+    - monto, descripcion, fecha
+    - cajas origen/destino (efectivo o transferencia)
+
+- finanzas_ajuste:
+  Ajustes contables:
+    - monto, descripcion, fecha
+    - caja_efectivo_id, caja_transferencia_id
+
+- finanzas_saldodiario:
+  Saldos por día:
+    - fecha, saldo, cajas asociadas
+
+- finanzas_transaccionme:
+  Movimientos en moneda extranjera
+
+- Tablas auxiliares:
+  - finanzas_categoria
+  - finanzas_etapa
+  - finanzas_tipogasto
+  - finanzas_tipoingreso
+  - finanzas_cajaefectivo
+  - finanzas_cajatransferencia
+  - finanzas_cajamonedaextranjera
+
+--- JORNADAS ---
+- jornada_jornada:
+  Jornada de trabajo:
+    - inicio y fin, estado, observaciones
+    - diferencia_efectivo, diferencia_transferencia
+    - cantina_id, ubicacion_id, canchero_id
+
+- jornada_alquiler:
+  Alquiler de cancha:
+    - fecha_inicio, cliente, monto_reserva, monto_alquiler
+    - pagos: efectivo y transferencia
+    - cancha_id, canchero_id, jornada_id
+
+- jornada_gastojornada:
+  Gasto específico de una jornada
+
+- jornada_venta:
+  Venta en jornada (productos, precios, pagos)
+
+- jornada_tarearealizada:
+  Registro de tareas realizadas en la jornada
+
+--- RESERVAS ---
+- reservas_reservaeventual:
+  Reservas únicas de cancha (fecha, hora, duración, cliente)
+
+- reservas_reservafija:
+  Reservas periódicas semanales
+
+- reservas_excepcionreservafija:
+  Excepciones a las reservas fijas
+
+--- TAREAS ---
+- tareas_tarea:
+  Definición de tareas:
+    - nombre, descripción, horario, periodicidad
+    - asignadas a ubicaciones y usuarios
+
+- tareas_periodicidad:
+  Valores posibles para periodicidad
+
+--- UBICACIONES ---
+- ubicacion_ubicacion:
+  Información de sedes o lugares físicos:
+    - nombre, dirección, ciudad, provincia, país, contacto
+
+--- USUARIOS (solo lo necesario) ---
+- auth_user:
+  Usuarios del sistema
+
+- auth_group:
+  Roles de usuario (propietario, canchero, tesorero, etc.)
+
+- core_cancheroubicacion:
+  Relación entre cancheros y ubicaciones

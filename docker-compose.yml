@@ -14,24 +14,24 @@ services:
       POSTGRES_DB: postgres
       PGDATA: /var/lib/postgresql/data
 
-  metabase:
-    image: metabase/metabase:latest
-    container_name: metabase
-    ports:
-      - '3001:3000'
-    volumes:
-      - ./metabase-data:/metabase-data
-    environment:
-      MB_DB_TYPE: postgres
-      MB_DB_DBNAME: postgres
-      MB_DB_PORT: 5432
-      MB_DB_USER: postgres
-      MB_DB_PASS: root
-      MB_DB_HOST: postgres-db
-    depends_on:
-      - postgres-db
-    links:
-      - postgres-db
+  # metabase:
+  #   image: metabase/metabase:latest
+  #   container_name: metabase
+  #   ports:
+  #     - '3001:3000'
+  #   volumes:
+  #     - ./metabase-data:/metabase-data
+  #   environment:
+  #     MB_DB_TYPE: postgres
+  #     MB_DB_DBNAME: postgres
+  #     MB_DB_PORT: 5432
+  #     MB_DB_USER: postgres
+  #     MB_DB_PASS: root
+  #     MB_DB_HOST: postgres-db
+  #   depends_on:
+  #     - postgres-db
+  #   links:
+  #     - postgres-db
 
 volumes:
   pgdata:
